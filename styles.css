@@ -1,0 +1,33 @@
+html, body{
+    margin:0;
+    height:100%;
+
+}
+
+.chosen{
+    color:#9e4eff;
+}
+
+.bgimg{
+    background-image: url("images/thirdlowpoly.png");
+    min-height:100%;
+    position:relative;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+
+}
+
+
+.inlinebox{
+    text-align:center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.buton{
+    text-align:right;
+}
