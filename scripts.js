@@ -117,6 +117,7 @@ function predictGrade(form){
     }
 
     var predictedFinalGrade = predictedGrade * (finalWeight/100) + currentGrade * (1 - (finalWeight/100));
+    predictedFinalGrade = predictedFinalGrade.toFixed(3);
     
     const element = document.getElementById("formPredict");
     const child = document.getElementById("predictbutton");
@@ -261,6 +262,7 @@ function neededGrade(form){
     }
 
     var predictedFinalGrade = (neededGrade - (currentGrade*(1 - finalWeight/100)))/(finalWeight/100);
+    predictedFinalGrade = predictedFinalGrade.toFixed(3);
     
     const element = document.getElementById("formNeeded");
     const child = document.getElementById("predictbutton");
