@@ -134,6 +134,7 @@ function neededGrade(form){
         predictedFinalGrade = neededGrade * (finalWeight/100) + currentGrade * (1 - (finalWeight/100));
     }
     
+    predictedFinalGrade = Math.round((predictedFinalGrade + Number.EPSILON) * 100) / 100;
     
     const element = document.getElementById("formNeeded");
     const child = document.getElementById("predictbutton");
