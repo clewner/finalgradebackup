@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="styles.css" rel="stylesheet" type = "text/css">
     <link href="css/main.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/jpg" href="images/faviconfour.png"/>
@@ -44,24 +44,40 @@
                       <!-- form card login -->
           <div class="card card-outline-secondary border-2 bg-info shadow-lg">
             <div class="card-header text-white bg-info border-2">
-              <h3 class="mb-0 text-white">Needed Final Grade Calculator</h3>
+              <h3 class="mb-0 text-white" id = "headerchange">Needed Final Grade Calculator</h3>
             </div>
             <div class="card-body text-white" id="thisone">
+              <form class="form-group pb-3">
+                  
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="needradio" onclick = "onRadio()" checked>
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Needed Final Grade Calculator
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="predictradio" onclick = "onRadio()">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Predicted Final Grade Calculator
+                  </label>
+                </div>
+                
+              </form>
               <form autocomplete="off" class="form" id="formNeeded" name="formNeeded" role="form">
                 <div class="form-group mb-1" id="currentgrade">
                   <label class = "mb-1">Your current grade (%): </label> 
                                       <input class="form-control mb-2" id="currgrade" name="currgrade" required="" type="number">
                 </div>
                 <div class="form-group mb-1" id = "neededgrade">
-                  <label class = "mb-1">The grade you want (%): </label> 
-                                      <input class="form-control mb-2" id="neededgrade" name = "neededgrade" required="" type="number">
+                  <label class = "mb-1" id = "changelabel">The grade you want (%): </label> 
+                                      <input class="form-control mb-2" id="neededinput" name = "neededinput" required="" type="number">
                 </div>
                 <div class="form-group mb-2" id = "finalweight">
                     <label class = "mb-1">How much your final is worth (%): </label> 
                                         <input class="form-control mb-2" id="finalworth" name = "finalworth" required="" type="number">
                 </div>
                 
-                <button onClick = "neededGrade(this.form)" class="btn btn-warning btn-lg float-right mt-1 text-white" type="button" id="predictbutton"><b>Calculate Predicted Final Grade</b></button>
+                <button onClick = "neededGrade(this.form)" class="btn btn-warning btn-lg float-right mt-1 text-white" type="button" id="predictbutton"><b id = "changebutton">Calculate Predicted Final Grade</b></button>
                 
                 
               </form>
@@ -72,11 +88,14 @@
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="card h-100 bg-info border border-3 border-success">
-            <a href = "needed.html"><img src="images/neededp.png" class="card-img-top border-2 border-success border-bottom" alt="..."></a>
             <div class="card-body">
-              <h5 class="card-title text-white">Needed Final Grade Calculator</h5>
-              <p class="card-text text-light">A needed final grade calculator which takes in your grade, how much your final is worth and what grade you want to have in the class and returns what grade you need to get on the final exam.</p>
+              <h5 class="card-title text-white">Final Grade Calculator</h5>
+              <p class="card-text text-light">A final grade calculator which has two functions. The first is a needed final grade calculator where you enter your current grade, 
+                how much your final is worth and the grade you want, and it returns what you need to score on the final to get that grade. The second is a predicted final grade calculator
+              where you enter your current grade, how much your final is worth and the grade you think you will get on the final, and it returns what your grade will be if you get that score.</p>
             </div>
+            <a href = "needed.html"><img src="images/neededp.png" class="card-img-top border-2 border-success border-top" alt="..."></a>
+            
             <!--
             <div class="card-footer">
               <small class="text-muted">Last updated 3 mins ago</small>
