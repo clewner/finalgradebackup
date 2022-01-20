@@ -4,6 +4,11 @@ html, body{
 
 }
 
+.logoimg{
+    width: 10%;
+    height: auto;
+}
+
 .chosen{
     color:#9e4eff;
 }
