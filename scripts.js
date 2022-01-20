@@ -1,152 +1,13 @@
-function predictGrade(form){
-    var currentGrade = form.currgrade.value;
-    var predictedGrade = form.predictgrade.value;
-    var finalWeight = form.finalworth.value;
-
-    const deleted = document.getElementById("sentence");
-    const secdeleted = document.getElementById("finalcalc");
-
-    const warndeleted = document.getElementById("currentgradewarning");
-    const warndeletedsec = document.getElementById("predictedgradewarning");
-    const warndeletedthird = document.getElementById("finalweightwarning");
-
-    if(warndeleted){
-        warndeleted.remove();
-        const top = document.getElementById("currentgrade");
-        top.classList.remove("mb-3");
-        const bottom = document.getElementById("predictedgrade");
-        bottom.classList.remove("mt-3");
-    }
-
-    if(warndeletedsec){
-        warndeletedsec.remove();
-        const top = document.getElementById("predictedgrade");
-        top.classList.remove("mb-3");
-        const bottom = document.getElementById("finalweight");
-        bottom.classList.remove("mt-3");
-    }
-
-    if(warndeletedthird){
-        warndeletedthird.remove();
-        const top = document.getElementById("finalweight");
-        top.classList.remove("mb-3");
-        const bottom = document.getElementById("predictbutton");
-        bottom.classList.remove("mt-4");
-    }
-
-    if(deleted){
-        deleted.remove();
-        secdeleted.remove();
-    }
-
-    if((currentGrade.toString() == "") || (currentGrade<0)){
-        const warning = document.createElement("SPAN");
-        const warningtext = document.createTextNode("Current grade can't be empty or negative.");
-        warning.appendChild(warningtext);
-        warning.setAttribute("id","currentgradewarning");
-        warning.classList.add("text-danger");
-        warning.classList.add("border");
-        warning.classList.add("border-danger");
-        warning.classList.add("rounded");
-        warning.classList.add("py-1");
-        warning.classList.add("px-2");
-
-        const inelement = document.getElementById("formPredict");
-        const inchild = document.getElementById("predictedgrade");
-        
-        const top = document.getElementById("currentgrade");
-        top.classList.add("mb-3");
-        const bottom = document.getElementById("predictedgrade");
-        bottom.classList.add("mt-3");
-
-        inelement.insertBefore(warning, inchild);
-
-    }
-
-    if((predictedGrade.toString() == "") || (predictedGrade<0)){
-        const warning = document.createElement("SPAN");
-        const warningtext = document.createTextNode("Predicted grade can't be empty or negative.");
-        warning.appendChild(warningtext);
-        warning.setAttribute("id","predictedgradewarning");
-        warning.classList.add("text-danger");
-        warning.classList.add("border");
-        warning.classList.add("border-danger");
-        warning.classList.add("rounded");
-        warning.classList.add("py-1");
-        warning.classList.add("px-2");
-
-        const inelement = document.getElementById("formPredict");
-        const inchild = document.getElementById("finalweight");
-        
-        const top = document.getElementById("predictedgrade");
-        top.classList.add("mb-3");
-        const bottom = document.getElementById("finalweight");
-        bottom.classList.add("mt-3");
-
-        inelement.insertBefore(warning, inchild);
-
-    }
-
-    if((finalWeight.toString() == "") || (finalWeight<0)){
-        const warning = document.createElement("SPAN");
-        const warningtext = document.createTextNode("Final weight can't be empty or negative.");
-        warning.appendChild(warningtext);
-        warning.setAttribute("id","finalweightwarning");
-        warning.classList.add("text-danger");
-        warning.classList.add("border");
-        warning.classList.add("border-danger");
-        warning.classList.add("rounded");
-        warning.classList.add("py-1");
-        warning.classList.add("px-2");
-
-        const inelement = document.getElementById("formPredict");
-        const inchild = document.getElementById("predictbutton");
-        
-        const top = document.getElementById("finalweight");
-        top.classList.add("mb-3");
-        const bottom = document.getElementById("predictbutton");
-        bottom.classList.add("mt-4");
-
-        inelement.insertBefore(warning, inchild);
-
-    }
-
-    if ((currentGrade.toString() == "") || (predictedGrade.toString() == "") || (finalWeight.toString() == "") || (finalWeight<0) || (predictedGrade<0) || (currentGrade<0)){
-        return false;
-
-    }
-
-    var predictedFinalGrade = predictedGrade * (finalWeight/100) + currentGrade * (1 - (finalWeight/100));
-    predictedFinalGrade = predictedFinalGrade.toFixed(3);
-    
-    const element = document.getElementById("formPredict");
-    const child = document.getElementById("predictbutton");
-
-    const sentence = document.createElement("h6");
-    const finalcalculation = document.createElement("h3");
-
-    const node = document.createTextNode("If you score a " + predictedGrade.toString() + "% on the final your overall grade will be: ");
-    const secnode = document.createTextNode(predictedFinalGrade.toString() + "%");
-
-    sentence.appendChild(node);
-    finalcalculation.appendChild(secnode);
-    
-    sentence.classList.add("mt-2");
-    sentence.setAttribute("id","sentence");
-    
-    finalcalculation.classList.add("mb-3");
-    finalcalculation.setAttribute("id","finalcalc");
-
-    element.insertBefore(sentence, child);
-    element.insertBefore(finalcalculation, child);
-
-
-}
-
 function neededGrade(form){
     var currentGrade = form.currgrade.value;
-    var neededGrade = form.neededgrade.value;
+    var neededGrade;
     var finalWeight = form.finalworth.value;
+
+    if(document.getElementById("needradio").checked == true){
+        neededGrade = form.neededinput.value;
+    }else{
+        neededGrade = form.predictedinput.value;
+    }
 
     const deleted = document.getElementById("sentence");
     const secdeleted = document.getElementById("finalcalc");
@@ -210,7 +71,13 @@ function neededGrade(form){
 
     if((neededGrade.toString() == "") || (neededGrade<0)){
         const warning = document.createElement("SPAN");
-        const warningtext = document.createTextNode("Needed grade can't be empty or negative.");
+        var warningtext;
+        if(document.getElementById("needradio").checked == true){
+            warningtext = document.createTextNode("Needed grade can't be empty or negative.");
+        }else{
+            warningtext = document.createTextNode("Predicted grade can't be empty or negative.");
+        }
+        
         warning.appendChild(warningtext);
         warning.setAttribute("id","neededgradewarning");
         warning.classList.add("text-danger");
@@ -260,9 +127,13 @@ function neededGrade(form){
         return false;
 
     }
-
-    var predictedFinalGrade = (neededGrade - (currentGrade*(1 - finalWeight/100)))/(finalWeight/100);
-    predictedFinalGrade = predictedFinalGrade.toFixed(3);
+    var predictedFinalGrade;
+    if(document.getElementById("needradio").checked == true){
+        predictedFinalGrade = (neededGrade - (currentGrade*(1 - finalWeight/100)))/(finalWeight/100);
+    }else{
+        predictedFinalGrade = neededGrade * (finalWeight/100) + currentGrade * (1 - (finalWeight/100));
+    }
+    
     
     const element = document.getElementById("formNeeded");
     const child = document.getElementById("predictbutton");
@@ -270,8 +141,16 @@ function neededGrade(form){
     const sentence = document.createElement("h6");
     const finalcalculation = document.createElement("h3");
 
-    const node = document.createTextNode("To get your overall grade to " + neededGrade.toString() + "% you'll need to score: ");
-    const secnode = document.createTextNode(predictedFinalGrade.toString() + "%");
+    var node;
+    var secnode;
+    if(document.getElementById("needradio").checked == true){
+        node = document.createTextNode("To get your overall grade to " + neededGrade.toString() + "% you'll need to score: ");
+        secnode = document.createTextNode(predictedFinalGrade.toString() + "%");
+    }else{
+        node = document.createTextNode("If you score a " + neededGrade.toString() + "% on the final your overall grade will be: ");
+        secnode = document.createTextNode(predictedFinalGrade.toString() + "%");
+    }
+    
 
     sentence.appendChild(node);
     finalcalculation.appendChild(secnode);
@@ -555,4 +434,100 @@ function gpaSubmit(form){
         element.appendChild(gpatext);
     }
 
+}
+
+function onRadio(){
+
+    var data;
+    var dataTransfer = document.getElementById("neededinput");
+    if(dataTransfer){
+        data = dataTransfer.value;
+    }else{
+        data = document.getElementById("predictedinput").value;
+    }
+
+    const deleted = document.getElementById("sentence");
+    const secdeleted = document.getElementById("finalcalc");
+
+    const warndeleted = document.getElementById("currentgradewarning");
+    const warndeletedsec = document.getElementById("neededgradewarning");
+    const warndeletedthird = document.getElementById("finalweightwarning");
+
+    if(warndeleted){
+        warndeleted.remove();
+        const top = document.getElementById("currentgrade");
+        top.classList.remove("mb-3");
+        const bottom = document.getElementById("neededgrade");
+        bottom.classList.remove("mt-3");
+    }
+
+    if(warndeletedsec){
+        warndeletedsec.remove();
+        const top = document.getElementById("neededgrade");
+        top.classList.remove("mb-3");
+        const bottom = document.getElementById("finalweight");
+        bottom.classList.remove("mt-3");
+    }
+
+    if(warndeletedthird){
+        warndeletedthird.remove();
+        const top = document.getElementById("finalweight");
+        top.classList.remove("mb-3");
+        const bottom = document.getElementById("predictbutton");
+        bottom.classList.remove("mt-4");
+    }
+
+    if(deleted){
+        deleted.remove();
+        secdeleted.remove();
+    }
+
+    var deletedone = document.getElementById("neededinput");
+    if(deletedone){
+        deletedone.remove();
+    }else{
+        var thirdelete = document.getElementById("predictedinput");
+        thirdelete.remove();
+    }
+
+    if(document.getElementById("needradio").checked == true){
+        const header = document.getElementById("headerchange");
+        header.innerHTML = "Needed Grade Calculator";
+        const button = document.getElementById("changebutton");
+        button.innerHTML = "Calculate Needed Final Grade";
+        const label = document.getElementById("changelabel");
+        label.innerHTML = "The grade you want (%): ";
+
+        const input = document.createElement("input");
+        input.setAttribute("id", "neededinput");
+        input.classList.add("form-control");
+        input.classList.add("mb-2");
+        input.setAttribute("type", "number");
+        input.setAttribute("name", "neededinput");
+        input.setAttribute("required", "");
+        input.setAttribute("value", data);
+
+        var connector = document.getElementById("neededgrade");
+        connector.appendChild(input);
+    
+    }else{
+        const header = document.getElementById("headerchange");
+        header.innerHTML = "Predicted Grade Calculator";
+        const button = document.getElementById("changebutton");
+        button.innerHTML = "Calculate Predicted Final Grade";
+        const label = document.getElementById("changelabel");
+        label.innerHTML = "What you think you will score on the final (%): "
+
+        const input = document.createElement("input");
+        input.setAttribute("id", "predictedinput");
+        input.classList.add("form-control");
+        input.classList.add("mb-2");
+        input.setAttribute("type", "number");
+        input.setAttribute("name", "predictedinput");
+        input.setAttribute("required", "");
+        input.setAttribute("value", data);
+
+        var connector = document.getElementById("neededgrade");
+        connector.appendChild(input);
+    }
 }
