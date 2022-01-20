@@ -491,8 +491,6 @@ function onRadio(){
     }
 
     if(document.getElementById("needradio").checked == true){
-        const header = document.getElementById("headerchange");
-        header.innerHTML = "Needed Grade Calculator";
         const button = document.getElementById("changebutton");
         button.innerHTML = "Calculate Needed Final Grade";
         const label = document.getElementById("changelabel");
@@ -511,8 +509,6 @@ function onRadio(){
         connector.appendChild(input);
     
     }else{
-        const header = document.getElementById("headerchange");
-        header.innerHTML = "Predicted Grade Calculator";
         const button = document.getElementById("changebutton");
         button.innerHTML = "Calculate Predicted Final Grade";
         const label = document.getElementById("changelabel");
