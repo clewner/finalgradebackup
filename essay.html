@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="styles.css" rel="stylesheet" type = "text/css">
     <link href="css/main.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/jpg" href="images/faviconfour.png"/>
@@ -23,10 +23,10 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item px-2">
-                <a class="nav-link" href="needed.html">Needed Grade Calculator</a>
+                <a class="nav-link" href="final.html">Final Grade Calculator</a>
               </li>
               <li class="nav-item px-2">
-                <a class="nav-link active chosen" href="" tabindex="-1" aria-disabled="true">Predicted Grade Calculator</a>
+                <a class="nav-link active chosen" href="" tabindex="-1" aria-disabled="true">Essay Word Generator</a>
               </li>
               <li class="nav-item px-2">
                 <a class="nav-link" href="gpa.html" tabindex="-1" aria-disabled="true">GPA Calculator</a>
@@ -43,27 +43,15 @@
                       <!-- form card login -->
           <div class="card card-outline-secondary border-2 bg-info shadow-lg">
             <div class="card-header text-white bg-info border-2">
-              <h3 class="mb-0 text-white">Predicted Final Grade Calculator</h3>
+              <h3 class="mb-0 text-white">Essay Word Generator</h3>
             </div>
             <div class="card-body text-white" id="thisone">
-              <form autocomplete="off" class="form" id="formPredict" name="formPredict" role="form">
-                <div class="form-group mb-1" id="currentgrade">
-                  <label class = "mb-1">Your current grade (%): </label> 
-                                      <input class="form-control mb-2" id="currgrade" name="currgrade" required="" type="number">
-                </div>
-                <div class="form-group mb-1" id = "predictedgrade">
-                  <label class = "mb-1">What you think you will score on the final (%): </label> 
-                                      <input class="form-control mb-2" id="predictgrade" name = "predictgrade" required="" type="number">
-                </div>
-                <div class="form-group mb-2" id = "finalweight">
-                    <label class = "mb-1">How much your final is worth (%): </label> 
-                                        <input class="form-control mb-2" id="finalworth" name = "finalworth" required="" type="number">
-                </div>
+              
                 
-                <button onClick = "predictGrade(this.form)" class="btn btn-warning btn-lg float-right mt-1 text-white" type="button" id="predictbutton"><b>Calculate Predicted Final Grade</b></button>
+                <button onClick = "wordGenerator(this.form)" class="btn btn-warning btn-lg float-right mt-1 text-white" type="button" id="wordbutton"><b>Generate Essay Word</b></button>
                 
                 
-              </form>
+              
             </div><!--/card-block-->
           </div><!-- /form card login -->
         </div>
