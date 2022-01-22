@@ -528,3 +528,44 @@ function onRadio(){
         connector.appendChild(input);
     }
 }
+
+function wordGenerator(){
+    fetch('wordlist.json')
+        .then(response => response.json())
+        .then(data => {
+            
+            var randomnum = Math.floor(Math.random() * data.words.length);
+            var pos = data.words[randomnum].meanings[0].partOfSpeech;
+            var abrv;
+
+            if(pos == "noun"){
+                abrv = "(n.) ";
+
+            }else if(pos == "verb"){
+                abrv = "(v.) ";
+
+            }else if(pos == "adjective"){
+                abrv = "(adj.) ";
+
+            }else if(pos == "adverb"){
+                abrv = "(adv.) ";
+            }
+
+            
+            document.getElementById("wordchange").innerHTML = (data.words[randomnum].word).toUpperCase();
+            document.getElementById("defchange").innerHTML = abrv + data.words[randomnum].meanings[0].definitions[0].definition.slice(0, -1);
+            document.getElementById("examplechange").innerHTML = "(" + data.words[randomnum].meanings[0].definitions[0].example + ")";
+
+        
+        
+        })
+
+
+    //const change = document.getElementById("wordchange");
+
+    //change.innerHTML = jsonData["words"][Math.floor(Math.random() * json["words"].length)];
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
