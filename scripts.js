@@ -557,7 +557,11 @@ function wordGenerator(){
             
             document.getElementById("wordchange").innerHTML = (data.words[randomnum].word).toUpperCase();
             document.getElementById("defchange").innerHTML = abrv + data.words[randomnum].meanings[0].definitions[0].definition.slice(0, -1);
-            document.getElementById("examplechange").innerHTML = "(" + data.words[randomnum].meanings[0].definitions[0].example + ")";
+            if(data.words[randomnum].meanings[0].definitions[0].example){
+                document.getElementById("examplechange").innerHTML = "(" + data.words[randomnum].meanings[0].definitions[0].example + ")";
+            }else{
+                document.getElementById("examplechange").innerHTML = "";
+            }
 
         
         
