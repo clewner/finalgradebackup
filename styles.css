@@ -4,11 +4,6 @@ html, body{
 
 }
 
-.logoimg{
-    max-width: 10%;
-    height: auto;
-}
-
 .chosen{
     color:#9e4eff;
 }
@@ -24,8 +19,19 @@ html, body{
 }
 
 
+
+.svgimg{
+    cursor: pointer;
+}
+
+
+
 .inlinebox{
     text-align:center;
+}
+
+.rightbox{
+    text-align:right;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -36,3 +42,4 @@ input[type=number]::-webkit-outer-spin-button {
 .buton{
     text-align:right;
 }
+
