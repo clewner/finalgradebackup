@@ -1,3 +1,5 @@
+var randomsound = 42069;
+
 function neededGrade(form){
     var currentGrade = form.currgrade.value;
     var neededGrade;
@@ -535,6 +537,7 @@ function wordGenerator(){
         .then(data => {
             
             var randomnum = Math.floor(Math.random() * data.words.length);
+            randomsound = randomnum;
             var pos = data.words[randomnum].meanings[0].partOfSpeech;
             var abrv;
 
@@ -568,4 +571,29 @@ function wordGenerator(){
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function onsoundclick(){
+    console.log(randomsound)
+    if(randomsound == 42069){
+        playSound("//ssl.gstatic.com/dictionary/static/sounds/20200429/word--_gb_1.8.mp3");
+    }else{
+        fetch('wordlist.json')
+        .then(response => response.json())
+        .then(data => {
+            playSound(data.words[randomsound].phonetics[0].audio);
+            
+
+        
+        
+        })
+        
+    }
+
+}
+
+
+function playSound(url) {
+    var a = new Audio(url);
+    a.play();
 }
