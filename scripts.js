@@ -562,6 +562,12 @@ function wordGenerator(){
             }else{
                 document.getElementById("examplechange").innerHTML = "";
             }
+            if(data.words[randomnum].phonetics[0].audio){
+                document.getElementById("soundimg").style.display = "inline";
+            }else{
+                document.getElementById("soundimg").style.display = "none";
+            }
+            
 
         
         
@@ -587,9 +593,6 @@ function onsoundclick(){
         .then(data => {
             playSound(data.words[randomsound].phonetics[0].audio);
             
-
-        
-        
         })
         
     }
