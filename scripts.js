@@ -1,4 +1,10 @@
 var randomsound = 42069;
+var oldnum;
+var randomnum = 42069;
+var newnum;
+var temp = "none";
+var unold = false;
+var unnew = false;
 
 function neededGrade(form){
     var currentGrade = form.currgrade.value;
@@ -535,8 +541,16 @@ function wordGenerator(){
     fetch('wordlist.json')
         .then(response => response.json())
         .then(data => {
+            if(temp == "back"){
+                randomnum = oldnum;
+            }else if(temp == "front"){
+                randomnum = newnum;
+            }
+
             
-            var randomnum = Math.floor(Math.random() * data.words.length);
+
+            oldnum = randomnum;
+            randomnum = Math.floor(Math.random() * data.words.length);
             randomsound = randomnum;
             var pos = data.words[randomnum].meanings[0].partOfSpeech;
             var abrv;
@@ -567,16 +581,40 @@ function wordGenerator(){
             }else{
                 document.getElementById("soundimg").style.display = "none";
             }
+            const backarrow = document.getElementById("svgback");
+            if(oldnum == 42069){
+                
+                if(backarrow.classList.contains("text-primary")){
+                    
+                }else{
+                    backarrow.classList.add("text-primary");
+                    backarrow.style.cursor = "auto";
+                    unold = false;
+                }
+            }else{
+                if(backarrow.classList.contains("text-primary")){
+                    backarrow.classList.remove("text-primary");
+                    backarrow.style.cursor = "pointer";
+                    unold = true;
+                }
+            }
+
+            const frontarrow = document.getElementById("svgfront");
+            if(frontarrow.classList.contains("text-primary")){
+                
+            }else{
+                unnew = false;
+                frontarrow.classList.add("text-primary");
+                frontarrow.style.cursor = "auto";
+            }
+
+
+            temp = "";
             
 
         
         
         })
-
-
-    //const change = document.getElementById("wordchange");
-
-    //change.innerHTML = jsonData["words"][Math.floor(Math.random() * json["words"].length)];
 }
 
 function capitalizeFirstLetter(string) {
@@ -584,7 +622,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function onsoundclick(){
-    console.log(randomsound)
+    
     if(randomsound == 42069){
         playSound("//ssl.gstatic.com/dictionary/static/sounds/20200429/word--_gb_1.8.mp3");
     }else{
@@ -603,4 +641,133 @@ function onsoundclick(){
 function playSound(url) {
     var a = new Audio(url);
     a.play();
+}
+
+function onback(){
+    if(unold){
+        fetch('wordlist.json')
+            .then(response => response.json())
+            .then(data => {
+                
+                newnum = randomnum;
+                randomsound = oldnum;
+                
+                var pos = data.words[oldnum].meanings[0].partOfSpeech;
+                var abrv;
+
+                if(pos == "noun"){
+                    abrv = "(n.) ";
+
+                }else if(pos == "verb"){
+                    abrv = "(v.) ";
+
+                }else if(pos == "adjective"){
+                    abrv = "(adj.) ";
+
+                }else if(pos == "adverb"){
+                    abrv = "(adv.) ";
+                }
+
+                
+                document.getElementById("wordchange").innerHTML = (data.words[oldnum].word).toUpperCase();
+                document.getElementById("defchange").innerHTML = abrv + data.words[oldnum].meanings[0].definitions[0].definition.slice(0, -1);
+                if(data.words[oldnum].meanings[0].definitions[0].example){
+                    document.getElementById("examplechange").innerHTML = "(" + data.words[oldnum].meanings[0].definitions[0].example + ")";
+                }else{
+                    document.getElementById("examplechange").innerHTML = "";
+                }
+                if(data.words[oldnum].phonetics[0].audio){
+                    document.getElementById("soundimg").style.display = "inline";
+                }else{
+                    document.getElementById("soundimg").style.display = "none";
+                }
+                
+                const backarrow = document.getElementById("svgback");
+                
+                    
+                if(backarrow.classList.contains("text-primary")){
+                        
+                }else{
+                    backarrow.classList.add("text-primary");
+                    backarrow.style.cursor = "auto";
+                    unold = false;
+                }
+                
+
+                const frontarrow = document.getElementById("svgfront");
+                if(frontarrow.classList.contains("text-primary")){
+                    frontarrow.classList.remove("text-primary");
+                    unnew = true;
+                    frontarrow.style.cursor = "pointer";
+                }
+
+                temp = "back";
+
+            
+            
+        })
+    }
+}
+
+function onfront(){
+    if(unnew){
+        fetch('wordlist.json')
+            .then(response => response.json())
+            .then(data => {
+                
+                
+                var pos = data.words[newnum].meanings[0].partOfSpeech;
+                var abrv;
+
+                if(pos == "noun"){
+                    abrv = "(n.) ";
+
+                }else if(pos == "verb"){
+                    abrv = "(v.) ";
+
+                }else if(pos == "adjective"){
+                    abrv = "(adj.) ";
+
+                }else if(pos == "adverb"){
+                    abrv = "(adv.) ";
+                }
+
+                
+                document.getElementById("wordchange").innerHTML = (data.words[newnum].word).toUpperCase();
+                document.getElementById("defchange").innerHTML = abrv + data.words[newnum].meanings[0].definitions[0].definition.slice(0, -1);
+                if(data.words[newnum].meanings[0].definitions[0].example){
+                    document.getElementById("examplechange").innerHTML = "(" + data.words[newnum].meanings[0].definitions[0].example + ")";
+                }else{
+                    document.getElementById("examplechange").innerHTML = "";
+                }
+                if(data.words[newnum].phonetics[0].audio){
+                    document.getElementById("soundimg").style.display = "inline";
+                }else{
+                    document.getElementById("soundimg").style.display = "none";
+                }
+
+                const frontarrow = document.getElementById("svgfront");
+                if(frontarrow.classList.contains("text-primary")){
+                    
+                }else{
+                    frontarrow.classList.add("text-primary");
+                    unnew = false;
+                    frontarrow.style.cursor = "auto";
+                }
+                
+                const backarrow = document.getElementById("svgback");
+                if(backarrow.classList.contains("text-primary")){
+                    backarrow.classList.remove("text-primary");
+                    backarrow.style.cursor = "pointer";
+                    unold = true;
+                }
+                
+                temp = "front";
+                
+                
+
+            
+            
+        })
+    }
 }
