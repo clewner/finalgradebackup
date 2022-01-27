@@ -715,7 +715,7 @@ function onfront(){
             .then(response => response.json())
             .then(data => {
                 
-                
+                randomsound = newnum;
                 var pos = data.words[newnum].meanings[0].partOfSpeech;
                 var abrv;
 
